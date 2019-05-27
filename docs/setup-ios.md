@@ -56,9 +56,21 @@ And that's it! Isn't RNPM awesome? :)
     pod 'CodePush', :path => '../node_modules/react-native-code-push'
     ```
 
-    *NOTE: The above path needs to be relative to your app's `Podfile`, so adjust it as necessary.*
+    CodePush depends on an internal copy of the `SSZipArchive`, `JWT` and `Base64` libraries, so if your project already includes some of them (either directly or via a transitive dependency), then you can install a version of CodePush which excludes it by depending specifically on the needed subspecs:
 
-    *NOTE: `JWT` library should be >= version 3.0.x*
+    ```ruby
+    # `SSZipArchive`, `JWT` and `Base64` already in use
+    pod 'CodePush', :path => '../node_modules/react-native-code-push', :subspecs => ['Core']
+
+    # or for example
+
+    # `SSZipArchive` and `Base64` already in use
+    pod 'CodePush', :path => '../node_modules/react-native-code-push', :subspecs => ['Core', 'JWT']
+    ```
+
+    *NOTE: The above paths needs to be relative to your app's `Podfile`, so adjust it as neccessary.*
+
+    *NOTE: `JWT` library should be of version 3.0.x*
 
 2. Run `pod install`
 
